@@ -149,8 +149,8 @@ fi
 if [[ ! -d ~/.pyenv ]] ; then
   echo "** Installing pyenv and python"
   curl https://pyenv.run | bash
-  ~/.pyenv/bin/pyenv install 3.7.4
-  ~/.pyenv/bin/pyenv global 3.7.4
+  ~/.pyenv/bin/pyenv install 3.8.0
+  ~/.pyenv/bin/pyenv global 3.8.0
   ~/.pyenv/shims/pip install --upgrade pip
 fi
 
