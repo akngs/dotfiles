@@ -1,3 +1,77 @@
 #!/usr/bin/env bash
+DEBIAN_FRONTEND=noninteractive
+
+# Install system packages
+PACKAGES="
+  autotools-dev
+  automake
+  bison
+  build-essential
+  curl
+  editorconfig
+  flex
+  gettext
+  git
+  iputils-ping
+  libbz2-dev
+  libevent-dev
+  libffi-dev
+  liblzma-dev
+  libncurses5-dev
+  libncursesw5-dev
+  libprotobuf-dev
+  libreadline-dev
+  libssl-dev
+  libsqlite3-dev
+  llvm
+  mosh
+  net-tools
+  netcat-openbsd
+  pkg-config
+  protobuf-compiler
+  python-openssl
+  rsync
+  ruby
+  ruby-dev
+  silversearcher-ag
+  socat
+  software-properties-common
+  tk-dev
+  tmux
+  tmuxinator
+  tree
+  vim
+  wget
+  xz-utils
+  yadm
+  zlib1g-dev
+  zsh
+"
+TOINSTALL=
+
+for package in ${PACKAGES} ; do
+  if ! dpkg -s $package >/dev/null 2>&1; then
+    TOINSTALL="${package} ${TOINSTALL} "
+  fi
+done
+
+if [[ "" != "${TOINSTALL}" ]] ; then
+  echo "** Installing system packages: ${TOINSTALL}"
+  sudo apt install -y ${TOINSTALL}
+fi
+
 # Update yadm's remote origin to use git instead of https
 yadm remote set-url origin "git@github.com:akngs/dotfiles.git"
+
+# Change shell to zsh
+if [[ "/usr/bin/zsh" != "$SHELL" ]] ; then
+   echo "** Changing shell to zsh"
+  chsh -s /usr/bin/zsh
+fi
+
+# Install oh-my-zsh
+if [[ ! -d ~/.oh-my-zsh ]] ; then
+  echo "** Installing oh-my-zsh"
+  sh -c "$(curl -fsSL https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
+fi
+
