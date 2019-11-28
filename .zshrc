@@ -1,3 +1,7 @@
+export TERM=xterm-256color
+export GPG_TTY=$(tty)
+export EDITOR=vim
+
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
@@ -74,8 +78,6 @@ source $ZSH/oh-my-zsh.sh
 
 # User configuration
 
-export TERM=xterm-256color
-
 if [[ -d ~/.pyenv ]] ; then
   export PATH="$HOME/.pyenv/bin:$PATH"
   eval "$(pyenv init -)"
@@ -89,6 +91,7 @@ if [[ -d ~/.poetry ]] ; then
 fi
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
 # export MANPATH="/usr/local/man:$MANPATH"
 
 # You may need to manually set your language environment

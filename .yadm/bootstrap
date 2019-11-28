@@ -82,8 +82,6 @@ yadm remote set-url origin "git@github.com:akngs/dotfiles.git"
 if [[ "/usr/bin/zsh" != "$SHELL" ]] ; then
   echo "** Changing shell to zsh"
   chsh -s /usr/bin/zsh
-  rm -f ~/.bashrc
-  rm -f ~/.profile
 fi
 
 # oh-my-zsh
@@ -95,15 +93,14 @@ fi
 # mosh
 if [[ ! -x /usr/local/bin/mosh ]] ; then
   echo "** Installing mosh"
-  wget https://mosh.org/mosh-1.3.2.tar.gz
-  tar -xvf mosh-1.3.2.tar.gz
-  rm mosh-1.3.2.tar.gz
-  cd mosh-1.3.2
+  git clone https://github.com/mobile-shell/mosh
+  cd mosh
+  ./autogen.sh
   ./configure
   make
   sudo make install
   cd ..
-  rm -rf mosh-1.3.2
+  rm -rf mosh
 fi
 
 # vim-plug
