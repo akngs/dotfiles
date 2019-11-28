@@ -39,7 +39,6 @@ APT_PACKAGES="
   vim
   wget
   xz-utils
-  yadm
   zlib1g-dev
   zsh
 "
