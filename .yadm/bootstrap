@@ -77,18 +77,6 @@ fi
 # update yadm's remote origin to use git instead of https
 yadm remote set-url origin "git@github.com:akngs/dotfiles.git"
 
-# zsh
-if [[ "/usr/bin/zsh" != "$SHELL" ]] ; then
-  echo "** Changing shell to zsh"
-  chsh -s /usr/bin/zsh ak
-fi
-
-# oh-my-zsh
-if [[ ! -d ~/.oh-my-zsh ]] ; then
-  echo "** Installing oh-my-zsh"
-  sh -c "$(curl -fsSL https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
-fi
-
 # mosh
 if [[ ! -x /usr/local/bin/mosh ]] ; then
   echo "** Installing mosh"
@@ -186,5 +174,17 @@ if [[ "" != "${TOINSTALL}" ]] ; then
   pip install ${TOINSTALL}
 else
   echo "   (nothing to install)"
+fi
+
+# zsh
+if [[ "/usr/bin/zsh" != "$SHELL" ]] ; then
+  echo "** Changing shell to zsh"
+  chsh -s /usr/bin/zsh ak
+fi
+
+# oh-my-zsh
+if [[ ! -d ~/.oh-my-zsh ]] ; then
+  echo "** Installing oh-my-zsh"
+  sh -c "$(curl -fsSL https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
 fi
 
