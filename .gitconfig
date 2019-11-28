@@ -1,0 +1,9 @@
+[user]
+	name = akngs
+	email = jania902@gmail.com
+[alias]
+	lg = log --graph --oneline
+	co = checkout
+	br = branch
+	ci = commit
+	st = status
