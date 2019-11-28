@@ -77,12 +77,23 @@ fi
 
 # Install nodejs
 if [[ ! -f /usr/bin/nodejs ]] ; then
+  echo "** Installing nodejs"
   curl -sL https://deb.nodesource.com/setup_12.x | sudo bash -
   sudo apt install -y nodejs
 fi
 
 # Install pyenv
 if [[ ! -d ~/.pyenv ]] ; then
+  echo "** Installing pyenv and python"
   curl https://pyenv.run | bash
+  ~/.pyenv/bin/pyenv install 3.7.4
+  ~/.pyenv/bin/pyenv global 3.7.4
+fi
+
+
+# Install jekyll
+if [[ ! -x /usr/local/bin/jekyll ]] ; then
+  echo "** Installing jekyll"
+  sudo gem install bundle jekyll
 fi
 
