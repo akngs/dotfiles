@@ -1,6 +1,4 @@
 #!/usr/bin/env bash
-export DEBIAN_FRONTEND=noninteractive
-
 APT_PACKAGES="
   autotools-dev
   automake
@@ -69,7 +67,7 @@ for package in ${APT_PACKAGES} ; do
 done
 if [[ "" != "${TOINSTALL}" ]] ; then
   echo "   (packages to install: ${TOINSTALL})"
-  sudo apt install -yq ${TOINSTALL}
+  sudo DEBIAN_FRONTEND=noninteractive apt install -yq ${TOINSTALL}
 else
   echo "   (nothing to install)"
 fi
