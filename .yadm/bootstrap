@@ -1,8 +1,7 @@
 #!/usr/bin/env bash
 DEBIAN_FRONTEND=noninteractive
 
-# Install system packages
-PACKAGES="
+APT_PACKAGES="
   autotools-dev
   automake
   bison
@@ -47,9 +46,18 @@ PACKAGES="
   zlib1g-dev
   zsh
 "
+
+NODEJS_PACKAGES="
+  eslint
+  stylelint
+  typescript
+  @vue/cli
+"
+
+# Install system packages
 TOINSTALL=
 
-for package in ${PACKAGES} ; do
+for package in ${APT_PACKAGES} ; do
   if ! dpkg -s $package >/dev/null 2>&1; then
     TOINSTALL="${package} ${TOINSTALL} "
   fi
@@ -82,6 +90,18 @@ if [[ ! -f /usr/bin/nodejs ]] ; then
   sudo apt install -y nodejs
 fi
 
+# Install nodejs packages
+TOINSTALL=
+
+for package in ${NODEJS_PACKAGES} ; do
+  sudo npm list -g ${package} >/dev/null 2>&1 || TOINSTALL="${package} ${TOINSTALL} "
+done
+
+if [[ "" != "${TOINSTALL}" ]] ; then
+  echo "** Installing nodejs packages: ${TOINSTALL}"
+  sudo npm install -g ${TOINSTALL}
+fi
+
 # Install pyenv
 if [[ ! -d ~/.pyenv ]] ; then
   echo "** Installing pyenv and python"
@@ -90,6 +110,13 @@ if [[ ! -d ~/.pyenv ]] ; then
   ~/.pyenv/bin/pyenv global 3.7.4
 fi
 
+# Install poetry
+if [[ ! -d ~/.poetry ]] ; then
+  echo "** Installing poetry"
+  curl -sSL https://raw.githubusercontent.com/sdispater/poetry/master/get-poetry.py | python
+  mkdir -p ~/.oh-my-zsh/plugins/poetry
+  ~/.poetry/bin/poetry completions zsh > ~/.oh-my-zsh/plugins/poetry/_poetry
+fi
 
 # Install jekyll
 if [[ ! -x /usr/local/bin/jekyll ]] ; then
