@@ -23,7 +23,6 @@ APT_PACKAGES="
   libssl-dev
   libsqlite3-dev
   llvm
-  mosh
   net-tools
   netcat-openbsd
   pkg-config
@@ -36,8 +35,6 @@ APT_PACKAGES="
   socat
   software-properties-common
   tk-dev
-  tmux
-  tmuxinator
   tree
   vim
   wget
@@ -63,7 +60,7 @@ PYTHON_PACKAGES="
   yapf
 "
 
-# Install system packages
+# system packages
 echo "** Installing system packages..."
 TOINSTALL=
 for package in ${APT_PACKAGES} ; do
@@ -78,29 +75,81 @@ else
   echo "   (nothing to install)"
 fi
 
-# Update yadm's remote origin to use git instead of https
+# update yadm's remote origin to use git instead of https
 yadm remote set-url origin "git@github.com:akngs/dotfiles.git"
 
-# Change shell to zsh
+# zsh
 if [[ "/usr/bin/zsh" != "$SHELL" ]] ; then
-   echo "** Changing shell to zsh"
+  echo "** Changing shell to zsh"
   chsh -s /usr/bin/zsh
+  rm -f ~/.bashrc
+  rm -f ~/.profile
 fi
 
-# Install oh-my-zsh
+# oh-my-zsh
 if [[ ! -d ~/.oh-my-zsh ]] ; then
   echo "** Installing oh-my-zsh"
   sh -c "$(curl -fsSL https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
 fi
 
-# Install nodejs
+# mosh
+if [[ ! -x /usr/local/bin/mosh ]] ; then
+  echo "** Installing mosh"
+  wget https://mosh.org/mosh-1.3.2.tar.gz
+  tar -xvf mosh-1.3.2.tar.gz
+  rm mosh-1.3.2.tar.gz
+  cd mosh-1.3.2
+  ./configure
+  make
+  sudo make install
+  cd ..
+  rm -rf mosh-1.3.2
+fi
+
+# vim-plug
+if [[ ! -f ~/.vim/autoload/plug.vim ]] ; then
+  echo "** Installing vim-plug"
+  curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+  vim '+PlugUpdate' '+PlugClean!' '+PlugUpdate' '+qall'
+fi
+
+# tmux
+if [[ ! -x /usr/local/bin/tmux ]] ; then
+  echo "** Installing tmux"
+  git clone https://github.com/tmux/tmux.git
+  cd tmux
+  sh autogen.sh
+  ./configure
+  make
+  sudo make install
+  cd ..
+  rm -rf tmux
+fi
+
+# jekyll
+if [[ ! -x /usr/local/bin/jekyll ]] ; then
+  echo "** Installing jekyll"
+  sudo gem install bundle jekyll
+fi
+
+# fzf
+if [[ ! -d ~/.fzf ]] ; then
+  echo "** Installing fzf"
+  git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
+  ~/.fzf/install --all
+  rm -f ~/.fzf.bash
+  rm -f ~/.fzf.fish
+  sudo ln -sf ~/.fzf/bin/fzf /usr/local/bin/fzf
+fi
+
+# nodejs
 if [[ ! -f /usr/bin/nodejs ]] ; then
   echo "** Installing nodejs"
   curl -sL https://deb.nodesource.com/setup_12.x | sudo bash -
   sudo apt install -y nodejs
 fi
 
-# Install pyenv
+# pyenv
 if [[ ! -d ~/.pyenv ]] ; then
   echo "** Installing pyenv and python"
   curl https://pyenv.run | bash
@@ -109,7 +158,7 @@ if [[ ! -d ~/.pyenv ]] ; then
   pip install --upgrade pip
 fi
 
-# Install poetry
+# poetry
 if [[ ! -d ~/.poetry ]] ; then
   echo "** Installing poetry"
   curl -sSL https://raw.githubusercontent.com/sdispater/poetry/master/get-poetry.py | python
@@ -117,13 +166,7 @@ if [[ ! -d ~/.poetry ]] ; then
   ~/.poetry/bin/poetry completions zsh > ~/.oh-my-zsh/plugins/poetry/_poetry
 fi
 
-# Install jekyll
-if [[ ! -x /usr/local/bin/jekyll ]] ; then
-  echo "** Installing jekyll"
-  sudo gem install bundle jekyll
-fi
-
-# Install nodejs packages
+# nodejs packages
 echo "** Installing nodejs packages..."
 TOINSTALL=
 for package in ${NODEJS_PACKAGES} ; do
@@ -136,7 +179,7 @@ else
   echo "   (nothing to install)"
 fi
 
-# Install python packages
+# python packages
 echo "** Installing python packages..."
 TOINSTALL=
 for package in ${PYTHON_PACKAGES} ; do
