@@ -54,18 +54,28 @@ NODEJS_PACKAGES="
   @vue/cli
 "
 
-# Install system packages
-TOINSTALL=
+PYTHON_PACKAGES="
+  autopep8
+  cookiecutter
+  flake8
+  isort
+  pylint
+  yapf
+"
 
+# Install system packages
+echo "** Installing system packages..."
+TOINSTALL=
 for package in ${APT_PACKAGES} ; do
   if ! dpkg -s $package >/dev/null 2>&1; then
     TOINSTALL="${package} ${TOINSTALL} "
   fi
 done
-
 if [[ "" != "${TOINSTALL}" ]] ; then
-  echo "** Installing system packages: ${TOINSTALL}"
+  echo "   (packages to install: ${TOINSTALL})"
   sudo apt install -y ${TOINSTALL}
+else
+  echo "   (nothing to install)"
 fi
 
 # Update yadm's remote origin to use git instead of https
@@ -90,24 +100,13 @@ if [[ ! -f /usr/bin/nodejs ]] ; then
   sudo apt install -y nodejs
 fi
 
-# Install nodejs packages
-TOINSTALL=
-
-for package in ${NODEJS_PACKAGES} ; do
-  sudo npm list -g ${package} >/dev/null 2>&1 || TOINSTALL="${package} ${TOINSTALL} "
-done
-
-if [[ "" != "${TOINSTALL}" ]] ; then
-  echo "** Installing nodejs packages: ${TOINSTALL}"
-  sudo npm install -g ${TOINSTALL}
-fi
-
 # Install pyenv
 if [[ ! -d ~/.pyenv ]] ; then
   echo "** Installing pyenv and python"
   curl https://pyenv.run | bash
   ~/.pyenv/bin/pyenv install 3.7.4
   ~/.pyenv/bin/pyenv global 3.7.4
+  pip install --upgrade pip
 fi
 
 # Install poetry
@@ -122,5 +121,31 @@ fi
 if [[ ! -x /usr/local/bin/jekyll ]] ; then
   echo "** Installing jekyll"
   sudo gem install bundle jekyll
+fi
+
+# Install nodejs packages
+echo "** Installing nodejs packages..."
+TOINSTALL=
+for package in ${NODEJS_PACKAGES} ; do
+  sudo npm list -g ${package} >/dev/null 2>&1 || TOINSTALL="${package} ${TOINSTALL} "
+done
+if [[ "" != "${TOINSTALL}" ]] ; then
+  echo "   (packages to install: ${TOINSTALL})"
+  sudo npm install -g ${TOINSTALL}
+else
+  echo "   (nothing to install)"
+fi
+
+# Install python packages
+echo "** Installing python packages..."
+TOINSTALL=
+for package in ${PYTHON_PACKAGES} ; do
+  pip list | grep ${package} >/dev/null 2>&1 || TOINSTALL="${package} ${TOINSTALL} "
+done
+if [[ "" != "${TOINSTALL}" ]] ; then
+  echo "   (packages to install: ${TOINSTALL})"
+  pip install ${TOINSTALL}
+else
+  echo "   (nothing to install)"
 fi
 
