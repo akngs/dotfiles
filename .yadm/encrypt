@@ -1,0 +1,6 @@
+.ssh/config
+.ssh/id_rsa
+.ssh/id_rsa.pub
+.ssh/id_rsa_kkyueing
+.ssh/id_rsa_kkyueing.pub
+.ssh/known_hosts
