@@ -85,6 +85,8 @@ fi
 if [[ ! -d ~/.oh-my-zsh ]] ; then
   echo "** Installing oh-my-zsh"
   sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
+  # revert .zshrc
+  yadm checkout -- ~/.zshrc
 fi
 
 # mosh
@@ -172,6 +174,7 @@ if [[ "" != "${TOINSTALL}" ]] ; then
 else
   echo "   (nothing to install)"
 fi
+sudo chown -R ak:ak ~/.config
 
 # python packages
 echo "** Installing python packages..."
