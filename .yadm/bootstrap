@@ -75,3 +75,14 @@ if [[ ! -d ~/.oh-my-zsh ]] ; then
   sh -c "$(curl -fsSL https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
 fi
 
+# Install nodejs
+if [[ ! -f /usr/bin/nodejs ]] ; then
+  curl -sL https://deb.nodesource.com/setup_12.x | sudo bash -
+  sudo apt install -y nodejs
+fi
+
+# Install pyenv
+if [[ ! -d ~/.pyenv ]] ; then
+  curl https://pyenv.run | bash
+fi
+
