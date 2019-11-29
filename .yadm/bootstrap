@@ -1,14 +1,15 @@
 #!/usr/bin/env bash
-APT_PACKAGES="
+APT_PREREQUISITE_PACKAGES="
+  apt-transport-https
   autotools-dev
   automake
   bison
   build-essential
+  ca-certificates
   curl
-  editorconfig
-  flex
   gettext
   git
+  flex
   iputils-ping
   libbz2-dev
   libevent-dev
@@ -27,18 +28,23 @@ APT_PACKAGES="
   protobuf-compiler
   python-openssl
   rsync
-  ruby
-  ruby-dev
-  silversearcher-ag
   socat
   software-properties-common
   tk-dev
-  tree
-  vim
   wget
   xz-utils
   zlib1g-dev
   zsh
+"
+
+APT_PACKAGES="
+  docker-ce
+  editorconfig
+  ruby
+  ruby-dev
+  silversearcher-ag
+  tree
+  vim
 "
 
 NODEJS_PACKAGES="
@@ -56,6 +62,31 @@ PYTHON_PACKAGES="
   pylint
   yapf
 "
+
+# prerequisite system packages
+echo "** Installing prerequisite system packages..."
+TOINSTALL=
+for package in ${APT_PREREQUISITE_PACKAGES} ; do
+  if ! dpkg -s $package >/dev/null 2>&1; then
+    TOINSTALL="${package} ${TOINSTALL} "
+  fi
+done
+if [[ "" != "${TOINSTALL}" ]] ; then
+  echo "   (packages to install: ${TOINSTALL})"
+  sudo DEBIAN_FRONTEND=noninteractive apt install -yq ${TOINSTALL}
+else
+  echo "   (nothing to install)"
+fi
+
+# update system repositories
+echo "** Updating system packages info..."
+
+## docker
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu bionic stable"
+
+## update
+sudo apt update
 
 # system packages
 echo "** Installing system packages..."
@@ -75,10 +106,13 @@ fi
 # update yadm's remote origin to use git instead of https
 yadm remote set-url origin "git@github.com:akngs/dotfiles.git"
 
+# add user to docker group
+sudo usermod -aG docker ${USER}
+
 # zsh
 if [[ "/usr/bin/zsh" != "$SHELL" ]] ; then
   echo "** Changing shell to zsh"
-  sudo chsh -s /usr/bin/zsh ak
+  sudo chsh -s /usr/bin/zsh ${USER}
 fi
 
 # oh-my-zsh
@@ -174,7 +208,7 @@ if [[ "" != "${TOINSTALL}" ]] ; then
 else
   echo "   (nothing to install)"
 fi
-sudo chown -R ak:ak ~/.config
+sudo chown -R ${USER}:${USER} ~/.config
 
 # python packages
 echo "** Installing python packages..."
