@@ -51,6 +51,7 @@ NODEJS_PACKAGES="
   eslint
   stylelint
   typescript
+  tslint
   @vue/cli
 "
 
