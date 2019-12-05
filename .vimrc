@@ -2,7 +2,6 @@ call plug#begin('~/.vim/plugged')
 
 Plug '~/.fzf'
 Plug 'cakebaker/scss-syntax.vim'
-Plug 'dense-analysis/ale'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'tpope/vim-fugitive'
 Plug 'mattn/emmet-vim'
@@ -115,16 +114,7 @@ let g:airline_mode_map = {
 let g:airline#parts#ffenc#skip_expected_string='utf-8[unix]'
 let g:airline_section_z = '%3p%% %3l:%3v'
 
-" ale
-let g:ale_fixers = { '*': ['trim_whitespace'] }
-let g:ale_sign_column_always = 1
-let g:ale_lint_on_text_changed = 'never'
-let g:ale_lint_on_enter = 0
-let g_ale_lint_on_save = 1
-let g:ale_fix_on_save = 1
-let g:airline#extensions#ale#enabled = 1
-highlight ALEError ctermbg=none cterm=underline
-highlight ALEWarning ctermbg=none cterm=underline
+set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
 
 " highlight
 set hlsearch
