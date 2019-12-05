@@ -1,0 +1,14 @@
+{
+  "coc.preferences.rootPatterns": [".git", "pyproject.toml", "setup.py", ".env"],
+  "coc.preferences.formatOnSaveFiletypes": ["python", "javascript", "typescript"],
+  "diagnostic.signOffset": 9999999,
+  "suggest.enablePreview": true,
+  "eslint.run": "onSave",
+  "eslint.autoFix": true,
+  "eslint.autoFixOnSave": true,
+  "python.jediEnabled": false,
+  "python.venvPath": "~/.pyenv",
+  "python.linting.mypyEnabled": true,
+  "python.formatting.provider": "yapf",
+  "python.formatting.yapfPath": "~/.pyenv/shims/yapf"
+}
