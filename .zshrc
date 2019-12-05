@@ -90,6 +90,8 @@ if [[ -d ~/.poetry ]] ; then
   poetry completions zsh > $ZSH/plugins/poetry/_poetry
 fi
 
+export PATH="$HOME/bin:$PATH"
+
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 # export MANPATH="/usr/local/man:$MANPATH"

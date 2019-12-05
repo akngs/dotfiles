@@ -1,4 +1,4 @@
-call plug#begin('~/.vim/plugged')
+call plug#begin('~/.local/share/nvim/plugged')
 
 Plug '~/.fzf'
 Plug 'cakebaker/scss-syntax.vim'
@@ -40,9 +40,6 @@ set updatetime=300
 " don't give |ins-completion-menu| messages.
 set shortmess+=c
 
-" always show signcolumns
-set signcolumn=yes
-
 " Use <cr> to confirm completion, `<C-g>u` means break undo chain at current position.
 " Coc only does snippet and additional edit on confirm.
 inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
@@ -70,6 +67,7 @@ set noshowmode
 
 " Show line number
 set number
+set numberwidth=5
 highlight LineNr guifg=#444444 guibg=NONE
 
 " vim-vue
