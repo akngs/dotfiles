@@ -67,6 +67,15 @@ PYTHON_PACKAGES="
 mkdir -p $HOME/bin
 mkdir -p $HOME/.config
 
+# create swapfile
+if [[ ! -d /swapfile ]] ; then
+  sudo fallocate -l 2G /swapfile
+  sudo chmod 600 /swapfile
+  sudo mkswap /swapfile
+  sudo swapon /swapfile
+  sudo echo "/swapfile swap swap defaults 0 0" >> /etc/fstab
+fi
+
 # prerequisite system packages
 echo "** Installing prerequisite system packages..."
 TOINSTALL=
