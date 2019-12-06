@@ -7,9 +7,10 @@ APT_PREREQUISITE_PACKAGES="
   build-essential
   ca-certificates
   curl
+  flex
   gettext
   git
-  flex
+  haskell-platform
   iputils-ping
   libbz2-dev
   libevent-dev
