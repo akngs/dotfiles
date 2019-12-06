@@ -17,9 +17,7 @@ call plug#end()
 " Truecolor support
 let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
 let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
-set t_Co=256
 set termguicolors
-" set background=dark
 let g:solarized_termtrans = 1
 try
     colorscheme solarized8
@@ -116,6 +114,7 @@ let g:airline_mode_map = {
       \ }
 let g:airline#parts#ffenc#skip_expected_string='utf-8[unix]'
 let g:airline_section_z = '%3p%% %3l:%3v'
+let g:airline#extensions#coc#enabled = 1
 
 set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
 
