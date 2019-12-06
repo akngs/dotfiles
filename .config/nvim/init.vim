@@ -9,14 +9,11 @@ Plug 'posva/vim-vue'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'lifepillar/vim-solarized8'
-Plug 'leafgarland/typescript-vim'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
 call plug#end()
 
 " Truecolor support
-let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
-let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
 set termguicolors
 let g:solarized_termtrans = 1
 try
@@ -28,15 +25,13 @@ endtry
 " if hidden is not set, TextEdit might fail.
 set hidden
 
-" always show signcolumns
+" signcolumns
 set signcolumn=yes
 
 " Some language servers have issues with backup files
 set nobackup
 set nowritebackup
-
-" Give more space for displaying messages
-set cmdheight=2
+set directory=.
 
 " You will have bad experience for diagnostic messages when it's default 4000.
 set updatetime=300
@@ -115,6 +110,9 @@ let g:airline_mode_map = {
 let g:airline#parts#ffenc#skip_expected_string='utf-8[unix]'
 let g:airline_section_z = '%3p%% %3l:%3v'
 let g:airline#extensions#coc#enabled = 1
+let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#left_sep = ' '
+let g:airline#extensions#tabline#left_alt_sep = ' '
 
 set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
 
