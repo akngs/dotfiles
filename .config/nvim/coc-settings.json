@@ -4,7 +4,6 @@
   "diagnostic.signOffset": 9999999,
   "suggest.enablePreview": true,
   "eslint.run": "onSave",
-  "eslint.autoFix": true,
   "eslint.autoFixOnSave": true,
   "python.jediEnabled": false,
   "python.venvPath": "~/.pyenv",

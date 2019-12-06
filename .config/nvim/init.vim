@@ -19,13 +19,19 @@ let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
 let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
 set t_Co=256
 set termguicolors
-set background=dark
+" set background=dark
 let g:solarized_termtrans = 1
 try
     colorscheme solarized8
 catch /^Vim\%((\a\+)\)\=:E185/
     " deal with it
 endtry
+
+" if hidden is not set, TextEdit might fail.
+set hidden
+
+" always show signcolumns
+set signcolumn=yes
 
 " Some language servers have issues with backup files
 set nobackup
@@ -67,7 +73,6 @@ set noshowmode
 
 " Show line number
 set number
-set numberwidth=5
 highlight LineNr guifg=#444444 guibg=NONE
 
 " vim-vue
