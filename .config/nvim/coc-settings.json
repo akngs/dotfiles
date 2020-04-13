@@ -2,6 +2,7 @@
   "coc.preferences.rootPatterns": [".git", "pyproject.toml", "setup.py", ".env"],
   "coc.preferences.formatOnSaveFiletypes": ["python", "javascript", "typescript"],
   "diagnostic.signOffset": 9999999,
+  "diagnostic.enableHighlightLineNumber": false,
   "diagnostic.errorSign": "✖",
   "suggest.enablePreview": true,
   "eslint.run": "onSave",

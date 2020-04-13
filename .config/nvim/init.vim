@@ -10,6 +10,7 @@ Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'lifepillar/vim-solarized8'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'scrooloose/nerdtree'
 
 call plug#end()
 
@@ -122,6 +123,7 @@ set incsearch
 
 " Key maps
 cmap : :FZF<CR>
+map <C-n> :NERDTreeToggle<CR>
 
 "" Disable arrow keys for training
 noremap <Up> <Nop>
