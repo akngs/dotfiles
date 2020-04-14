@@ -1,5 +1,11 @@
 {
-  "coc.preferences.rootPatterns": [".git", "pyproject.toml", "setup.py", ".env"],
+  "coc.preferences.rootPatterns": [
+    ".env",
+    ".git",
+    "node_modules",
+    "pyproject.toml",
+    "setup.py"
+  ],
   "coc.preferences.formatOnSaveFiletypes": ["python", "javascript", "typescript"],
   "diagnostic.signOffset": 9999999,
   "diagnostic.enableHighlightLineNumber": false,
