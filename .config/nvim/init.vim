@@ -11,6 +11,8 @@ Plug 'vim-airline/vim-airline-themes'
 Plug 'lifepillar/vim-solarized8'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'scrooloose/nerdtree'
+Plug 'leafgarland/typescript-vim'
+Plug 'peitalin/vim-jsx-typescript'
 
 call plug#end()
 
