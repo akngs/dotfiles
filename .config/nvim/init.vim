@@ -16,6 +16,12 @@ Plug 'peitalin/vim-jsx-typescript'
 
 call plug#end()
 
+" Coc extentions
+let g:coc_global_extensions = ['coc-stylelintplus', 'coc-prettier']
+
+" File types
+autocmd BufNewFile,BufRead *.mdx set filetype=markdown
+
 " Truecolor support
 set termguicolors
 let g:solarized_termtrans = 1
