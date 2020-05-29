@@ -203,25 +203,28 @@ if [[ ! -d ~/.fzf ]] ; then
 fi
 
 # delta
+DELTA_VERSION="0.1.1"
 if [[ ! -x ~/bin/delta ]] ; then
 wget -qO- \
-  https://github.com/dandavison/delta/releases/download/0.1.1/delta-0.1.1-x86_64-unknown-linux-musl.tar.gz | \
+  https://github.com/dandavison/delta/releases/download/${DELTA_VERSION}/delta-${DELTA_VERSION}-x86_64-unknown-linux-musl.tar.gz | \
   tar xvz --strip-components 1 --directory bin/ --wildcards '**/delta'
 fi
 
 # nodejs
+NODE_VERSION="14"
 if [[ ! -f /usr/bin/nodejs ]] ; then
   echo "** Installing nodejs"
-  curl -sL https://deb.nodesource.com/setup_12.x | sudo bash -
+  curl -sL https://deb.nodesource.com/setup_${NODE_VERSION}.x | sudo bash -
   sudo apt install -y nodejs
 fi
 
 # pyenv
+PYTHON_VERSION="3.8.3"
 if [[ ! -d ~/.pyenv ]] ; then
   echo "** Installing pyenv and python"
   curl https://pyenv.run | bash
-  ~/.pyenv/bin/pyenv install 3.7.4
-  ~/.pyenv/bin/pyenv global 3.7.4
+  ~/.pyenv/bin/pyenv install ${PYTHON_VERSION}
+  ~/.pyenv/bin/pyenv global ${PYTHON_VERSION}
   ~/.pyenv/shims/pip install --upgrade pip
 fi
 
