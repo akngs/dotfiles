@@ -1,3 +1,7 @@
+[core]
+	pager = delta --plus-color="#013800" --minus-color="#340001" --theme="Dracula"
+[interactive]
+	diffFilter = delta --color-only
 [user]
 	name = akngs
 	email = jania902@gmail.com

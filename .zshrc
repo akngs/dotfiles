@@ -91,6 +91,14 @@ export PATH="$HOME/bin:$PATH"
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
+if [[ -d ~/.deno ]] ; then
+  export DENO_INSTALL="$HOME/.deno"
+  export PATH="$DENO_INSTALL/bin:$PATH"
+fi
+
+if [[ -d /usr/local/go ]] ; then
+  export PATH="$HOME/go/bin:/usr/local/go/bin:$PATH"
+fi
 # export MANPATH="/usr/local/man:$MANPATH"
 
 # Preferred editor for local and remote sessions

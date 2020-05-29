@@ -6,7 +6,7 @@
     "pyproject.toml",
     "setup.py"
   ],
-  "coc.preferences.formatOnSaveFiletypes": ["python", "javascript", "typescript", "css"],
+  "coc.preferences.formatOnSaveFiletypes": ["python", "javascript", "typescript", "css", "go"],
   "diagnostic.signOffset": 9999999,
   "diagnostic.enableHighlightLineNumber": false,
   "diagnostic.errorSign": "✖",
@@ -15,8 +15,25 @@
   "eslint.autoFixOnSave": true,
   "stylelintplus.autoFixOnSave": true,
   "python.jediEnabled": false,
+  "python.pythonPath": "~/.pyenv/shims/python",
   "python.venvPath": "~/.pyenv",
+  "python.linting.enabled": true,
+  "python.linting.lintOnSave": true,
   "python.linting.mypyEnabled": true,
-  "python.formatting.provider": "yapf",
-  "python.formatting.yapfPath": "~/.pyenv/shims/yapf"
+  "python.linting.mypyPath": "~/.pyenv/shims/mypy",
+  "python.linting.flake8Enabled": true,
+  "python.linting.flake8Path": "~/.pyenv/shims/flake8",
+  "python.formatting.provider": "black",
+  "python.formatting.blackPath": "~/.pyenv/shims/black",
+  "python.sortImports.path": "isort",
+  "languageserver": {
+    "golang": {
+      "command": "gopls",
+      "rootPatterns": ["go.mod", ".vim/", ".git/", ".hg/"],
+      "filetypes": ["go"],
+      "initializationOptions": {
+        "usePlaceholders": true
+      }
+    }
+  }
 }
