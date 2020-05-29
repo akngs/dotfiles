@@ -1,7 +1,6 @@
 #!/usr/bin/env bash
 DEBIAN_FRONTEND=noninteractive
-sudo apt update
-sudo apt install -y yadm
+curl -fLo /usr/local/bin/yadm https://github.com/TheLocehiliosan/yadm/raw/master/yadm && chmod a+x /usr/local/bin/yadm
 
 # add user
 sudo useradd ak -m
