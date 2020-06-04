@@ -1,4 +1,5 @@
 export TERM=xterm-256color
+[[ $TMUX != "" ]] && export TERM=tmux-256color
 export GPG_TTY=$(tty)
 export EDITOR=vim
 export LANG=en_US.UTF-8
@@ -99,6 +100,11 @@ fi
 if [[ -d /usr/local/go ]] ; then
   export PATH="$HOME/go/bin:/usr/local/go/bin:$PATH"
 fi
+
+if [[ -d ~/.cargo/bin ]] ; then
+  export PATH="$HOME/.cargo/bin:$PATH"
+fi
+
 # export MANPATH="/usr/local/man:$MANPATH"
 
 # Preferred editor for local and remote sessions
