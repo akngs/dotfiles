@@ -15,16 +15,11 @@
   "eslint.autoFixOnSave": true,
   "stylelintplus.autoFixOnSave": true,
   "python.jediEnabled": false,
-  "python.pythonPath": "~/.pyenv/shims/python",
-  "python.venvPath": "~/.pyenv",
   "python.linting.enabled": true,
   "python.linting.lintOnSave": true,
   "python.linting.mypyEnabled": true,
-  "python.linting.mypyPath": "~/.pyenv/shims/mypy",
   "python.linting.flake8Enabled": true,
-  "python.linting.flake8Path": "~/.pyenv/shims/flake8",
-  "python.formatting.provider": "black",
-  "python.formatting.blackPath": "~/.pyenv/shims/black",
+  "python.formatting.provider": "yapf",
   "python.sortImports.path": "isort",
   "languageserver": {
     "golang": {

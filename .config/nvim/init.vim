@@ -17,7 +17,7 @@ Plug 'peitalin/vim-jsx-typescript'
 call plug#end()
 
 " Coc extentions
-let g:coc_global_extensions = ['coc-stylelintplus', 'coc-prettier']
+let g:coc_global_extensions = ['coc-stylelintplus']
 
 " File types
 autocmd BufNewFile,BufRead *.mdx set filetype=markdown
